@@ -4,25 +4,31 @@ const {users} = models;
 
 class UserController{
     getUser = async (req,res) =>{
-       const {email} = req.query;
-       const user = await users.findOne({
-           where: {
-               email
-           }
+       const user = await users.findAll({
+           attributes:{ exclude: ['password']}
        });
-       const users=_.map(user,(o)=>{
-           return {
-               ...o,
-               vip: true,
-           }
-       })
-        res.status(200).json({user})
+       const response=_.map(user,(o)=>({           
+            ...o.dataValues,
+            vip: true,    
+        }));
+        res.status(200).json({response})
     }
 
     postUser = async (req,res)=>{
         const {body} = req;
         const {email,password}=body
         const user = await users.create({
+            email,
+            password
+        })
+        console.log(user);
+        res.status(200).json({user})
+    }
+
+    deleteUser = async (req,res)=>{
+        const {body} = req;
+        const {email}=body
+        const user = await users.send({
             email,
             password
         })

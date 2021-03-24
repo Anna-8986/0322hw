@@ -12,6 +12,6 @@ router.get('/',UserController.getUser);
 //POST: /api/user
 router.post('/',UserController.postUser)
 router.patch('/')
-router.delete('/')
+router.delete('/',UserController.deleteUser)
 
 export default router;
