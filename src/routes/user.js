@@ -11,7 +11,7 @@ const router = Router();
 router.get('/',UserController.getUser);
 //POST: /api/user
 router.post('/',UserController.postUser)
-router.patch('/')
+router.patch('/',UserController.updateUser)
 router.delete('/',UserController.deleteUser)
 
 export default router;
