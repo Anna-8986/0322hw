@@ -10,8 +10,9 @@ const router = Router();
 //Get: /api/user
 router.get('/',UserController.getUser);
 //POST: /api/user/find
+router.get('/get',UserMiddleware.jwtAuthenticate, UserController.getUser);
+router.post('/find',UserMiddleware.Authenticate, UserController.getUser);
 router.post('/',UserController.postUser);
-router.post('/find',UserMiddleware.Authenticate);
 router.patch('/',UserController.updateUser);
 router.delete('/',UserController.deleteUser);
 
